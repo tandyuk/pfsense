@@ -125,7 +125,7 @@ function filter_pflog_start($kill_first = false) {
 		$retval = 1;
 	}
 	if($retval != 0)
-		mwexec_bg("/usr/sbin/{$tcpdump_cmd} | logger -t pf -p local0.info");
+		mwexec_bg("/usr/sbin/{$tcpdump_cmd}  | /usr/bin/sed -e 'N;s/\\n //;P;D;' | logger -t pf -p local0.info");
 	unmute_kernel_msgs();
 }
 
